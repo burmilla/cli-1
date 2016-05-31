@@ -245,9 +245,6 @@ func (a *App) Run(arguments []string) (err error) {
 
 // DEPRECATED: Another entry point to the cli app, takes care of passing arguments and error handling
 func (a *App) RunAndExitOnError() {
-	fmt.Fprintf(a.errWriter(),
-		"DEPRECATED cli.App.RunAndExitOnError.  %s  See %s\n",
-		contactSysadmin, runAndExitOnErrorDeprecationURL)
 	if err := a.Run(os.Args); err != nil {
 		fmt.Fprintln(a.errWriter(), err)
 		OsExiter(1)
@@ -481,9 +478,6 @@ func HandleAction(action interface{}, context *Context) (err error) {
 	vals := reflect.ValueOf(action).Call([]reflect.Value{reflect.ValueOf(context)})
 
 	if len(vals) == 0 {
-		fmt.Fprintf(ErrWriter,
-			"DEPRECATED Action signature.  Must be `cli.ActionFunc`.  %s  See %s\n",
-			contactSysadmin, appActionDeprecationURL)
 		return nil
 	}
 
